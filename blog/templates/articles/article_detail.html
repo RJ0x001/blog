@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>{{ blog.title }}</h1>
+<p><strong>Post date</strong> {{ article.created_time }}</p>
+<p><strong>Author:</strong> <a href="#">{{ article.author }}</a></p>
+<p><strong>Text:</strong></p>
+<p style="white-space:pre-wrap;">{{ article.text }}</p>
+
+{% endblock %}

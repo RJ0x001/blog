@@ -1,0 +1,20 @@
+{% extends 'articles/base.html' %}
+
+{% block content %}
+  {% for article in articles %}
+    <div class="post">
+        <ul>
+          <a href="{{ article.get_absolute_url }}">{{ article.title }}</a>
+        </ul>
+        <ul>
+          <h5>{{ article.created_time }}</h5>
+        </ul>
+
+    </div>
+  {% empty %}
+    <h1>Blog</h1>
+
+    <p>No posts yet.</p>
+  {% endfor %}
+
+{% endblock content %}

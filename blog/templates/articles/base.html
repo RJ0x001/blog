@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}Blog &middot; {{ block.super }}{% endblock %}
+
+
+
+    <div>
+      {% block content %}{% endblock %}
+    </div>
+    <div>
+      {% block user %}{% endblock %}
+    </div>
