@@ -20,5 +20,4 @@ class NewArticleForm(ModelForm):
         fields = [
             'title',
             'text',
-
         ]
