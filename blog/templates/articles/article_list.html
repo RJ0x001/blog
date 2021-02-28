@@ -1,5 +1,12 @@
 {% extends 'articles/base.html' %}
 
+{% block user %}
+<div class="user_info">
+    Профиль {{ article.articles.title }}
+</div>
+
+{% endblock %}
+
 {% block content %}
   {% for article in articles %}
     <div class="post">
@@ -16,5 +23,5 @@
 
     <p>No posts yet.</p>
   {% endfor %}
-
+<a href="{% url 'article_create' %}"> Добавить запись </a>
 {% endblock content %}

@@ -5,6 +5,7 @@ from django.forms import ModelForm
 
 from .models import Article
 
+
 class UserRegisterForm(UserCreationForm):
     email = forms.EmailField()
 
