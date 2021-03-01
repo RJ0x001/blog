@@ -2,13 +2,34 @@
 
 {% block content %}
 
-<h1>{{ blog.title }}</h1>
-<p><strong>Post date</strong> {{ article.created_time }}</p>
-<p><strong>Author:</strong> <a href="#">{{ article.author }}</a></p>
-<p><strong>Text:</strong></p>
-<p style="white-space:pre-wrap;">{{ article.text }}</p>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8">
+            <h1>{{ article.title }}</h1>
+            <p class="lead"><i class="fa fa-user"></i> by <a href="">{{ article.author }}</a>
+            </p>
+            <hr>
+            <p><i class="fa fa-calendar"></i> Опубликовано {{ article.created_time }}</p>
+            {% if article.updated_time %}
+                <p><i class="fa fa-calendar"></i> Отредактировано {{ article.updated_time }}</p>
+            {% else %}
+                <p><i class="fa fa-calendar"></i> Запись не редактировалась</p>
+            {% endif %}
+            <hr>
 
-<p><a href="{% url 'article_update' article.id %}">Редактировать</a></p>
-<p><a href="{% url 'article_delete' article.id %}">Удалить</a></p>
-<p><a href="{% url 'articles_list' %}">Список статей</a></p>
+            <p class="lead">
+                {{ article.text }}
+            </p>
+            <br/>
+        </div>
+    </div>
+
+    <p><a href="{% url 'article_update' article.id %}">Редактировать</a></p>
+    <p><a href="{% url 'article_delete' article.id %}">Удалить</a></p>
+    <p><a href="{% url 'articles_list' %}">Назад к списоку статей</a></p>
+
+</div>
+
+
+
 {% endblock %}

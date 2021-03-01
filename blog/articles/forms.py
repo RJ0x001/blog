@@ -7,7 +7,7 @@ from .models import Article
 
 
 class UserRegisterForm(UserCreationForm):
-    email = forms.EmailField()
+
 
     class Meta:
         model = User

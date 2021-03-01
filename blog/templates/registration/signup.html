@@ -1,21 +1,45 @@
-{% extends 'base.html' %}
-
-{% block title %}Sign Up{% endblock %}
+{% extends "base.html" %}
 
 {% block content %}
-  <h2>Sign up</h2>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Sign Up</button>
-  </form>
-  {% if messages %}
-    <ul class="messages">
-        {% for message in messages %}
-        <li
-                {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}
-        </li>
-        {% endfor %}
-    </ul>
-  {% endif %}
-{% endblock %}
+{% load widget_tweaks %}
+<div class="container">
+	<div class="row">
+
+	    <div class="col-md-8 col-md-offset-2">
+
+    		<h1>Регистрация нового пользователя</h1>
+            <form method="post" novalidate>
+  {% csrf_token %}
+
+  {% for field in form.visible_fields %}
+    <div class="form-group">
+      {{ field.label_tag }}
+
+      {% if form.is_bound %}
+        {% if field.errors %}
+          {% render_field field class="form-control is-invalid" %}
+          {% for error in field.errors %}
+            <div class="invalid-feedback">
+              {{ error }}
+            </div>
+          {% endfor %}
+        {% else %}
+          {% render_field field class="form-control is-valid" %}
+        {% endif %}
+      {% else %}
+        {% render_field field class="form-control" %}
+      {% endif %}
+
+      {% if field.help_text %}
+        <small class="form-text text-muted">{{ field.help_text }}</small>
+      {% endif %}
+    </div>
+  {% endfor %}
+
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+		</div>
+	</div>
+</div>
+
+{% endblock content %}

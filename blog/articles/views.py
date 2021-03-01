@@ -25,7 +25,7 @@ class SignUpView(CreateView):
 class AllArticles(CustomLoginRequiredMixin, ListView):
     # filterset_class = AuthorFilter
     context_object_name = 'articles'
-    paginate_by = 10
+    paginate_by = 5
     # template_name = ...
 
     def get_queryset(self):
@@ -33,18 +33,15 @@ class AllArticles(CustomLoginRequiredMixin, ListView):
         return Article.objects.filter(author=author_filter).order_by('-created_time')
 
 
-class ArticleDetailView(CustomLoginRequiredMixin, UserPassesTestMixin, DetailView):
+class ArticleDetailView(CustomLoginRequiredMixin, DetailView):
     model = Article
 
-    def test_func(self):
-        article = self.get_object()
-        if self.request.user == article.author:
-            return True
-        return False
+    fields = ['title', 'text']
 
 
 class ArticleCreateView(CustomLoginRequiredMixin, CreateView):
     model = Article
+    form_class = NewArticleForm
 
     def form_valid(self, form):
         form.instance.author = self.request.user
@@ -68,7 +65,7 @@ class ArticleUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
 class ArticleDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Article
-    success_url = '/articles/articles'
+    success_url = '/articles'
 
     def test_func(self):
         article = self.get_object()
