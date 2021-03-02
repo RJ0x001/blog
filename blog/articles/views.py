@@ -3,13 +3,10 @@ from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.db.models import Q
-from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
 
 from .forms import UserRegisterForm, NewArticleForm
 from .models import Article
-from .filters import AuthorFilter
 
 
 class CustomLoginRequiredMixin(LoginRequiredMixin):
@@ -23,10 +20,8 @@ class SignUpView(CreateView):
 
 
 class AllArticles(CustomLoginRequiredMixin, ListView):
-    # filterset_class = AuthorFilter
     context_object_name = 'articles'
     paginate_by = 5
-    # template_name = ...
 
     def get_queryset(self):
         author_filter = self.request.user
