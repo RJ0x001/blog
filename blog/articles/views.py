@@ -43,7 +43,7 @@ class ArticleCreateView(CustomLoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
-class ArticleUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+class ArticleUpdateView(CustomLoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Article
     fields = ['title', 'text']
 
@@ -58,7 +58,7 @@ class ArticleUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         return False
 
 
-class ArticleDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+class ArticleDeleteView(CustomLoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Article
     success_url = ''
 
