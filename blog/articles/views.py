@@ -65,7 +65,7 @@ class ArticleUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
 class ArticleDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Article
-    success_url = '/articles'
+    success_url = ''
 
     def test_func(self):
         article = self.get_object()
